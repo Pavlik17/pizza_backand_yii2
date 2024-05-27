@@ -59,7 +59,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-<<<<<<< HEAD
+
                 '' => 'product/index',
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
                 [
@@ -68,7 +68,7 @@ $config = [
                     'prefix' => '',
                     'extraPatterns' => [
                         'GET  index'=> 'product/product',
-=======
+
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -84,7 +84,6 @@ $config = [
                     'prefix' =>'',
                     'extraPatterns' => [
                         'GET index' => 'product/category',
->>>>>>> 5b33ede (First commit)
                     ],
                 ],
             ],
@@ -100,11 +99,11 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-<<<<<<< HEAD
+
         //'allowedIPs' => ['127.0.0.1', '::1'],
-=======
+
         'allowedIPs' => ['*', '::1'],
->>>>>>> 5b33ede (First commit)
+
     ];
 
     $config['bootstrap'][] = 'gii';
