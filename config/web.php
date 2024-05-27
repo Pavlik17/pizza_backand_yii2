@@ -13,8 +13,21 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'fUIe4AW2COeVR6eT81YLe5CJCyKZ99rv',
+            'cookieValidationKey' => 'yYy4YYYX8lYyYyQOl8vOcO6ROo7i8twO',
+            'baseUrl' => '',
+            'enableCsrfValidation' => false,
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ],
+        'response' => [
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                $response->headers->add('Access-Control-Allow-Origin', 'http://localhost:5173');
+                $response->headers->add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+                $response->headers->add('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+            },
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -46,6 +59,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+<<<<<<< HEAD
                 '' => 'product/index',
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
                 [
@@ -54,6 +68,23 @@ $config = [
                     'prefix' => '',
                     'extraPatterns' => [
                         'GET  index'=> 'product/product',
+=======
+                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'product',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET index'=> 'product/product',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'product',
+                    'prefix' =>'',
+                    'extraPatterns' => [
+                        'GET index' => 'product/category',
+>>>>>>> 5b33ede (First commit)
                     ],
                 ],
             ],
@@ -69,7 +100,11 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
+<<<<<<< HEAD
         //'allowedIPs' => ['127.0.0.1', '::1'],
+=======
+        'allowedIPs' => ['*', '::1'],
+>>>>>>> 5b33ede (First commit)
     ];
 
     $config['bootstrap'][] = 'gii';

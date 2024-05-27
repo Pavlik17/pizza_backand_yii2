@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace app\controllers;
 
-use yii\web\Controller;
+use yii\rest\ActiveController;
+use yii\rest\Controller;
 use app\models\Product;
 use app\models\Categories;
 
@@ -12,19 +13,18 @@ use app\models\Categories;
 
 final class ProductController extends Controller
 {
-    public function actionProduct(): string
+    public function actionProduct(): array
     {
-        $products = Product::find()->all();
-
-        return $this->render('/product/index', compact('products'));
+        $products = Product::find()->asArray()->all();
+        return [
+            'products' => $products,
+        ];
     }
-
     public function actionCategory()
     {
-        $categories = Categories::find()->where(['id' => 2])->asArray()->all();
-
-        print '<pre>';
-        print_r($categories);
-        die();
+        $categories = Categories::find()->asArray()->all();
+        return [
+            'categories' => $categories,
+        ];
     }
 }

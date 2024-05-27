@@ -14,7 +14,8 @@ class m240414_214614_create_categories_table extends Migration
         $this->createTable('{{%categories}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
-        ]);
+            'show' => $this->booleanllasfneg()->notNull(),
+            ]);
     }
     /**
      * {@inheritdoc}
