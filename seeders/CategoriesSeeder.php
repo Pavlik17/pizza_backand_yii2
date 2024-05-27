@@ -6,6 +6,26 @@ use Yii;
 
 class CategoriesSeeder{
     private array $categories = [
+        [
+            'name'=>'Пицца',
+            'show' =>0,
+        ],
+        [
+            'name'=>'Закуски',
+            'show' =>0,
+        ],
+        [
+            'name'=>'Десерты',
+            'show' =>0,
+        ],
+        [
+            'name'=>'Напитки',
+            'show' =>0,
+        ],
+        [
+            'name'=>'Комбо',
+            'show' =>0,
+        ],
         'Пицца',
         'Закуски',
         'Десерты',

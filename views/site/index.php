@@ -13,4 +13,5 @@ use yii\helpers\Html;
                 <?= Html::encode($product['price']) ?>
             </li>
         <?php endforeach; ?>
+
 </div>
