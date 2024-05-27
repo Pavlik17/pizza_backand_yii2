@@ -55,39 +55,30 @@ $config = [
             ],
         ],
         'db' => $db,
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-
-                '' => 'product/index',
-                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'products',
-                    'prefix' => '',
-                    'extraPatterns' => [
-                        'GET  index'=> 'product/product',
-
-                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'product',
-                    'prefix' => '',
-                    'extraPatterns' => [
-                        'GET index'=> 'product/product',
-                    ],
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'product',
-                    'prefix' =>'',
-                    'extraPatterns' => [
-                        'GET index' => 'product/category',
-                    ],
-                ],
-            ],
-        ],
+       'urlManager' => [
+           'enablePrettyUrl' => true,
+           'showScriptName' => false,
+           'rules' => [
+               '' => 'product/index',
+               '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+               [
+                   'class' => 'yii\rest\UrlRule',
+                   'controller' => 'products',
+                   'prefix' => '',
+                   'extraPatterns' => [
+                       'GET index'=> 'product/product',
+                   ],
+               ],
+               [
+                   'class' => 'yii\rest\UrlRule',
+                   'controller' => 'product',
+                   'prefix' => '',
+                   'extraPatterns' => [
+                       'GET index' => 'product/category',
+                   ],
+               ],
+           ],
+       ],
     ],
     'params' => $params,
 
