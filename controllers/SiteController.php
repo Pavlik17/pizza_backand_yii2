@@ -9,8 +9,9 @@ use app\models\Product;
 
 class SiteController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
+    public function actionError(){} 
 }

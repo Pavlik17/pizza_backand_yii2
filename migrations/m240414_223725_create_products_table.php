@@ -17,7 +17,7 @@ class m240414_223725_create_products_table extends Migration
             'image' => $this->text(600)->Null(),
             'title' => $this->string(90)->notNull(),
             'description'=>$this->text(600)->notNull(),
-            'price'=> $this->decimal()->notNull(),
+            'price'=> $this->float()->notNull(),
             'category_id' => $this->integer()->notNull(),
         ]);
         $this->addForeignKey(

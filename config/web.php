@@ -35,6 +35,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'enableSession' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -77,11 +78,66 @@ $config = [
                        'GET index' => 'product/category',
                    ],
                ],
+               [
+                   'class' => 'yii\rest\UrlRule',
+                   'controller' => 'basket',
+                   'prefix' => '',
+                   'extraPatterns' => [
+                       'POST send-order' => 'basket/send-order',
+                   ],
+               ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'admin',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET authorization' => 'admin/authorization',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'register',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET registrer' => 'register/register',
+                ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'auth',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'POST auth' => 'auth/auth',
+                ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'reset-password',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET reset-password' => 'reset-password/reset-password',
+                ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'check-token',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'POST check-token' => 'check-token/check-token',
+                ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'add-image',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'POST add-image-stocks-populars' => 'add-image-stocks-populars/add-image',
+                ]
            ],
        ],
     ],
     'params' => $params,
-
+    ]
 ];
 
 if (YII_ENV_DEV) {

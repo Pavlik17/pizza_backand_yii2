@@ -26,16 +26,11 @@ class CategoriesSeeder{
             'name'=>'Комбо',
             'show' =>0,
         ],
-        'Пицца',
-        'Закуски',
-        'Десерты',
-        'Напитки',
-        'Комбо',
     ];
     public function up()
     {
         foreach ($this->categories as $category){
-            Yii::$app->db->createCommand()->insert('categories',['name'=>$category])->execute();
+            Yii::$app->db->createCommand()->insert('categories',$category)->execute();
         }
     }
     public function down()

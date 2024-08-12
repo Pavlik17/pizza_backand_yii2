@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-use yii\db\ActiveRecord;
+use yii\base\Model;
 
 /**
  *@property int $id
@@ -19,34 +19,47 @@ use yii\db\ActiveRecord;
  * @property string $paymentMethod
  * @property string $methodReceiving
  */
-class Order extends ActiveRecord
+class OrderForm extends Model
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%orders}}';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+  public $name;
+  public $phone_number;
+  public $street;
+  public $home;
+  public $entrance;
+  public $flat;
+  public $floor;
+  public $totalSum;
+  public $payment_method;
+  public $method_receiving;
+  public $order_products;
+    public function rules():array
     {
         return [
-            [['product_id'],'integer'],
-            [['totalSum'],'number'],
-            [['name','phone','street','house','entrance','flat','floor','totalSum','paymentMethod','methodReceiving'],'string'],
+            [['name', 'phone_number', 'street', 'home', 'totalSum', 'payment_method', 'method_receiving'],'required'],
+            [['totalSum','flat','floor','home','entrance'],'number'],
+            ['order_products', 'filter', 'filter' => function ($products) {
+                if (!is_array($products)) $this->addError('test', 'Ошибка валидации свойства order_products');
+
+                if (count($products) === 0) $this->addError('test', 'Ваш массив пуст order_products');
+
+                foreach ($products as $product) {
+                    if (!is_array($product)) {
+                        $this->addError('error_order_products', 'Содержимое колонки order_products не ассоативный массив');
+                        continue;
+                    }
+                    if (!array_key_exists('id', $product)) {
+                        $this->addError('test', 'Нету свойства id');
+                        continue;
+                    }
+                    if (!array_key_exists('count', $product)) {
+                        $this->addError('test', 'Нету свойства count');
+                    }
+                }
+
+                return $products;
+            }],
+            [['name','phone_number','street','payment_method','method_receiving'],'string'],
         ];
     }
-    public function getProduct()
-    {
-        return $this->hasOne(Product::class, ['product_id' => 'id']);
-    }
-    /**
-     * {@inheritdoc}
-     */
-
 }
 

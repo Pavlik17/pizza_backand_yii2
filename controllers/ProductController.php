@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace app\controllers;
 
-use yii\rest\ActiveController;
 use yii\rest\Controller;
 use app\models\Product;
 use app\models\Categories;
+use yii\filters\auth\HttpBearerAuth;
 
 //Написать actions CRUD на категории и продукты
 
@@ -20,11 +20,11 @@ final class ProductController extends Controller
             'products' => $products,
         ];
     }
-    public function actionCategory()
+    public function actionCategory(): array
     {
         $categories = Categories::find()->asArray()->all();
         return [
             'categories' => $categories,
-        ];
+        ]; 
     }
-}
+};
