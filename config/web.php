@@ -4,6 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
+    'params' => $params,
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -12,6 +13,15 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'corsManager' => [
+            'class' => \yii\filters\Cors::class,
+            'cors' => [
+                'Origin' => ['http://localhost:5173'],
+                'Access-Control-Request-Method' => ['GET', 'POST', 'OPTIONS'],
+                'Access-Control-Allow-Credentials' => true,
+                'Access-Control-Allow-Headers' => ['Content-Type', 'Authorization'],
+            ],
+        ],
         'request' => [
             'cookieValidationKey' => 'yYy4YYYX8lYyYyQOl8vOcO6ROo7i8twO',
             'baseUrl' => '',
@@ -20,6 +30,7 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
+
         'response' => [
             'class' => 'yii\web\Response',
             'on beforeSend' => function ($event) {
@@ -27,8 +38,14 @@ $config = [
                 $response->headers->add('Access-Control-Allow-Origin', 'http://localhost:5173');
                 $response->headers->add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
                 $response->headers->add('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+                if (Yii::$app->request->isOptions) {
+                    $response->statusCode = 200;
+                    $response->data = []; // Пустой ответ
+                    $response->send();
+                }
             },
         ],
+        
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -99,7 +116,16 @@ $config = [
                     'controller' => 'register',
                     'prefix' => '',
                     'extraPatterns' => [
-                        'GET registrer' => 'register/register',
+                        'POST register' => 'register/register',
+                ],
+                ],
+                //test
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'test',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET test' => '/test/test',
                 ],
                 ],
                 [
@@ -124,20 +150,38 @@ $config = [
                     'prefix' => '',
                     'extraPatterns' => [
                         'POST check-token' => 'check-token/check-token',
-                ],
+                    ],  
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'add-image',
+                    'controller' => 'admin/add-image-stocks-populars/upload/',
+                    'prefix' => '',
+                ],
+                //контроллеры на получение изображений в admin-panel
+                //акционные
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'get-images-stocks',
                     'prefix' => '',
                     'extraPatterns' => [
-                        'POST add-image-stocks-populars' => 'add-image-stocks-populars/add-image',
-                ]
-           ],
+                        'GET get-images-stocks' => 'admin/get-images-stocks/get-images',
+                    ],  
+                ],
+                //популярные
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'get-images-populars',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET get-images-populars' => 'admin/get-images-populars/get-images',
+                    ],  
+                ],
+                //изображения меню
        ],
     ],
-    'params' => $params,
-    ]
+    
+],
+    
 ];
 
 if (YII_ENV_DEV) {

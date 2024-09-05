@@ -1,14 +1,20 @@
 <?php 
 
+//Админ панель
+
 namespace app\models;
 use yii\base\Model;
 
 class ImageFormProductsMenu extends Model{
     public $imageFile;
-
+    public $categoryId;
+    public static function tableName() { 
+        return 'product';
+    }
     public function rules(){
         return [
             [['imageFile'],'file','skipOnEmpty' => false,'extentions' => 'png,jpg'],
+            [['categoryId'],'integer'],
         ];
     }
 

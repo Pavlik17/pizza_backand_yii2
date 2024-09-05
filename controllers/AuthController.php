@@ -12,7 +12,7 @@ final class AuthController extends Controller{
         $model = new AuthForm();
         if($model->load(Yii::$app->request->post(),'') && $model->validate()){
             $user = User::findByEmail($model->email);
-            if(!empty($user) &&  $user->validatePassword($model->password) ){
+            if(!empty($user) &&  $user->validatePassword($model->password)){
                 $token = $this->generateToken();
                 $user->accessToken = $token;
                 $user->save();

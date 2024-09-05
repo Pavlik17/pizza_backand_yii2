@@ -42,9 +42,12 @@ use yii\web\IdentityInterface;
         return static::findOne(['email' => $email]);
     }
 
-    public function validatePassword($password)
+    public function validatePassword($password) 
     {
-        return Yii::$app->security->validatePassword($password, $this->password);
+        $user = User::findByEmail($this->email);
+        if ($user !== null) {
+            return Yii::$app->security->validatePassword($password,$user->password);
+        }
+        
     }
-
  };

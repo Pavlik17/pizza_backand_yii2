@@ -1,5 +1,6 @@
 <?php
 
+
 namespace app\controllers;
 
 use app\models\RegisterForm;
@@ -8,9 +9,11 @@ use yii\rest\Controller;
 use Yii;
 
 final class RegisterController extends Controller {  
+    
     public function actionRegister(){
         $model = new RegisterForm();
-        if($model->load(Yii::$app->request->post(),'') && $model->validate()){     
+        if($model->load(Yii::$app->request->getBodyParams(),'') && $model->validate()){     
+            Yii::info('Запрос на регистрацию: ' . json_encode($model->attributes), __METHOD__);
             $userData = User::findByEmail($model->email);
 
             if(empty($userData)) {
@@ -21,16 +24,21 @@ final class RegisterController extends Controller {
                 $user->phone = $model->phone;
                 $user->authKey = null;
                 $user->accessToken = null;
-                $user->save();  
-
-                Yii::$app->response->statusCode = 201;
+                    if($user->save()){  
+                        Yii::$app->response->statusCode = 201;
+                        return ['status' => 'success', 'user' => $user];
+                    }
+                    else{
+                        Yii::error($user->getErrors(), __METHOD__);
+                        return ['errors' => $user->getErrors()];
+                    }
                 } else {   
                     Yii::$app->response->statusCode = 200;
+                    return ['status' => 'exists', 'message' => 'User already exists'];
                 }
                 return [];
-
-            } else {
-                throw new \yii\web\HttpException(400);
+        } else {
+            throw new \yii\web\BadRequestHttpException('Validation failed');
         }
     } 
 

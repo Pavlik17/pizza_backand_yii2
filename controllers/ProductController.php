@@ -7,7 +7,6 @@ namespace app\controllers;
 use yii\rest\Controller;
 use app\models\Product;
 use app\models\Categories;
-use yii\filters\auth\HttpBearerAuth;
 
 //Написать actions CRUD на категории и продукты
 

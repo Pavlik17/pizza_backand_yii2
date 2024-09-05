@@ -3,30 +3,6 @@ namespace app\seeders;
 use Yii;
 class PopularSeeder{
     private array $populars = [
-        [
-            'image' => '/path',
-            'product_id' => 6,
-        ],
-        [
-            'image' => '/path',
-            'product_id' => 10,
-        ],
-        [
-            'image' => '/path',
-            'product_id' => 11,
-        ],
-        [
-            'image' => '/path',
-            'product_id' => 1,
-        ],
-        [
-            'image' => '/path',
-            'product_id' => 2,
-        ],
-        [
-            'image' => '/path',
-            'product_id' => 3,
-        ],
     ];
 
     public function up()
