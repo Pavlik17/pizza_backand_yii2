@@ -119,15 +119,6 @@ $config = [
                         'POST register' => 'register/register',
                 ],
                 ],
-                //test
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'test',
-                    'prefix' => '',
-                    'extraPatterns' => [
-                        'GET test' => '/test/test',
-                ],
-                ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'auth',
@@ -152,12 +143,24 @@ $config = [
                         'POST check-token' => 'check-token/check-token',
                     ],  
                 ],
+                //добавить новый продукт через админку
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'admin/add-image-stocks-populars/upload/',
+                    'controller' => 'add-admin-menu-products',
                     'prefix' => '',
+                    'extraPatterns' => [
+                        'POST add-admin-menu-products' => 'admin/add-admin-menu-products/upload',
+                    ],
                 ],
-                //контроллеры на получение изображений в admin-panel
+                //получить продукты в админку
+                // [
+                //     'class' => 'yii\rest\UrlRule',
+                //     'controller' => '-admin-menu-products',
+                //     'prefix' => '',
+                //     'extraPatterns' => [
+                //         'GET get-admin-menu-products' => 'admin/get-admin-menu-products/get-products',
+                //     ],
+                // ],
                 //акционные
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -175,8 +178,48 @@ $config = [
                     'extraPatterns' => [
                         'GET get-images-populars' => 'admin/get-images-populars/get-images',
                     ],  
+                ],   
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'product',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET product' => 'product/pizza-products',
+                    ],  
+                ],          
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'product',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET product' => 'product/desserts-products',
+                    ],
                 ],
-                //изображения меню
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'product',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET product' => 'product/snacks-products',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'product',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET product' => 'product/drancks-products',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'product',
+                    'prefix' => '',
+                    'extraPatterns' => [
+                        'GET product' => 'product/combo-products',
+                    ],
+                ],
+                
        ],
     ],
     

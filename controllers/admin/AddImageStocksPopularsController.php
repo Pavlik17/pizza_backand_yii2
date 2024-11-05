@@ -12,10 +12,12 @@ class AddImageStocksPopularsController extends Controller{
     public function actionUpload(){
        $uploads = UploadedFile::getInstancesByName("imageFile");
        $idTypeImage = Yii::$app->request->post('idType'); 
+
        if(empty($uploads)){
             Yii::$app->response->statusCode = 400;
             return 'Отсутствуют загруженные файлы!!!';
        }
+       
        foreach($uploads as $file){
             if($file instanceof UploadedFile){
                 if(in_array($file->extension,['jpg', 'png', 'jpeg'])){

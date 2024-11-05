@@ -8,9 +8,7 @@ use yii\base\Model;
 class ImageFormProductsMenu extends Model{
     public $imageFile;
     public $categoryId;
-    public static function tableName() { 
-        return 'product';
-    }
+    
     public function rules(){
         return [
             [['imageFile'],'file','skipOnEmpty' => false,'extentions' => 'png,jpg'],
@@ -18,7 +16,7 @@ class ImageFormProductsMenu extends Model{
         ];
     }
 
-    public function upload(){
-        // добавить фильтрацию на основе категории продукта
-    }
+    // public function upload(){
+    //     // добавить фильтрацию на основе категории продукта
+    // }
 };

@@ -5,6 +5,7 @@ namespace app\controllers\admin;
 use app\models\Popular;
 use yii\base\Controller;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class GetImagesPopularsController extends Controller{
     public function actionGetImages(){
@@ -17,4 +18,4 @@ class GetImagesPopularsController extends Controller{
             'popular' => $images,
         ];
     }
-}
+};

@@ -25,5 +25,15 @@ class RegisterForm extends Model{
              ['password', 'string', 'min' => 3, 'max' => 15],
              ['userName', 'string', 'min' => 2]         
             ];
-    }   
+    }  
+    
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
